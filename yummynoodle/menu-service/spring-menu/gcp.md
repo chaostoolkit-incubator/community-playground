@@ -10,8 +10,7 @@ Create a cluster, 3 nodes is the norm. Wait for it to become available.
 
 ```bash
 $ export PROJECT_ID="$(gcloud config get-value project -q)"
-$ docker build -t gcr.io/${PROJECT_ID}/ingres-app:0.1.5 .
+$ docker build -t gcr.io/${PROJECT_ID}/menu-app:0.1.1 .
 $ gcloud auth configure-docker
-$ docker push gcr.io/${PROJECT_ID}/ingres-app:0.1.5
-$ kubectl apply -f k8s/
+$ docker push gcr.io/yummy-noodle-staging/menu-app:0.1.1
 ```

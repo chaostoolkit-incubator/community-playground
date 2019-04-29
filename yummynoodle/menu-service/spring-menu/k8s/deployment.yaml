@@ -2,18 +2,18 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: ingres-service
+  name: menu-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service: ingres-service
+      service: menu-service
   template:
     metadata:
       name: yummy-noodle-bar
       labels:
         name: yummy-noodle-bar
-        service: ingres-service
+        service: menu-service
         biz-app-id: retail
     spec:
       containers:
@@ -23,7 +23,7 @@ spec:
           containerPort: 8080
           protocol: TCP
         imagePullPolicy: Always
-        image: gcr.io/yummy-noodle-staging/ingres-app:0.1.5
+        image: gcr.io/yummy-noodle-staging/menu-app:0.1.1
         resources:
           limits:
             cpu: 0.1
