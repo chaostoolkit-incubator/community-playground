@@ -18,4 +18,4 @@ The book ["Learning Chaos Engineering"](http://shop.oreilly.com/product/06369202
 
 The following sample applications and accompanying experiments are provided in this project:
 
-* [The Yummy Noodle Bar](yummynoodle/REAME.md)
+* [The Yummy Noodle Bar](yummynoodle/)

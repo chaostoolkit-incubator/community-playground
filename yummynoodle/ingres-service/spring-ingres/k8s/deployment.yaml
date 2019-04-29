@@ -1,0 +1,52 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: ingres-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: ingres-service
+  template:
+    metadata:
+      name: yummy-noodle-bar
+      labels:
+        name: yummy-noodle-bar
+        service: ingres-service
+        biz-app-id: retail
+    spec:
+      containers:
+      - name: ingres-app
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        imagePullPolicy: Always
+        image: gcr.io/yummy-noodle-staging/ingres-app:0.1.2
+        resources:
+          limits:
+            cpu: 0.1
+            memory: 512Mi
+          requests:
+            cpu: 0.1
+            memory: 512Mi
+        readinessProbe:
+          httpGet:
+            path: "/actuator/health"
+            port: 8080
+          initialDelaySeconds: 120 # Gives time for Spring Boot to launch
+          timeoutSeconds: 10
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: "/actuator/health"
+            port: 8080
+          initialDelaySeconds: 120 # Gives time for Spring Boot to launch
+          timeoutSeconds: 10
+          periodSeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
