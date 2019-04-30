@@ -1,0 +1,6 @@
+python-slugify
+simplejson
+progress
+aiohttp
+uvloop
+requests

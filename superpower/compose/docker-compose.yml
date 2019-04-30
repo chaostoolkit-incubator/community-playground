@@ -1,0 +1,62 @@
+version: '3'
+
+networks:
+  web:
+    external: true
+
+services:
+  traefik:
+    image: traefik:1.7
+    restart: always
+    ports:
+      - 8000:80
+    networks:
+      - web
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.toml:/traefik.toml
+    container_name: traefik
+  powersource-service:
+    build:
+      context: ../powersource
+    ports:
+      - "6061:6061"
+    networks:
+      - web
+      - default
+    labels:
+      - "traefik.docker.network=web"
+      - "traefik.enable=true"
+      - "traefik.powersource.port=6061"
+      - "traefik.powersource.protocol=http"
+  superpower-service:
+    build:
+      context: ../superpower
+    ports:
+      - "6060:6060"
+    environment:
+      - POWERSOURCE_URL=http://powersource-service:6061
+    networks:
+      - web
+      - default
+    labels:
+      - "traefik.docker.network=web"
+      - "traefik.enable=true"
+      - "traefik.superpower.frontend.rule=Host:my-awesome-app.org;Path:/"
+      - "traefik.superpower.port=6060"
+      - "traefik.superpower.protocol=http"
+  superpower-static:
+    build:
+      context: ../superpower
+      dockerfile: Dockerfile.static
+    expose:
+      - "80"
+    networks:
+      - web
+      - default
+    labels:
+      - "traefik.docker.network=web"
+      - "traefik.enable=true"
+      - "traefik.superpower-static.frontend.rule=Host:my-awesome-app.org;PathPrefix:/public"
+      - "traefik.superpower-static.port=80"
+      - "traefik.superpower-static.protocol=http"

@@ -1,0 +1,22 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: superpower-ingress
+  namespace: mucon
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/preserve-host: "true"
+    traefik.ingress.kubernetes.io/redirect-permanent: "true"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: superpower-service
+          servicePort: 8080
+      - path: /public
+        backend:
+          serviceName: superpower-service
+          servicePort: 8081

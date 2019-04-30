@@ -1,0 +1,51 @@
+{
+    "version": "1.0.0",
+    "title": "Users should fetch their superpowers under 1 second even under load",
+    "description": "Can we sustain heavy load?",
+    "tags": [
+        "kubernetes", "superpower"
+    ],
+    "configuration": {
+        "service_url": {
+            "type": "env",
+            "key": "SUPERPOWER_URL"
+        }
+    },
+    "contributions": {
+        "availability": "high",
+        "reliability": "medium",
+        "safety": "none",
+        "security": "none",
+        "performability": "high"
+    },
+    "steady-state-hypothesis": {
+        "title": "Super powers must arrive fast",
+        "probes": [
+            {
+                "type": "probe",
+                "name": "users-must-receive-superpower",
+                "tolerance": 200,
+                "provider": {
+                    "type": "python",
+                    "module": "chaospower.probes",
+                    "func": "ask_for_superpower",
+                    "arguments": {
+                        "service_url": "${service_url}",
+                        "timeout": 1
+                    }
+                }
+            }
+        ]
+    },
+    "method": [
+        {
+            "type": "action",
+            "name": "perform-some-load",
+            "provider": {
+                "type": "process",
+                "path": "vegeta",
+                "arguments": "attack -targets=./experiments/scenario.txt -workers=8 -rate=25 -timeout=10s -duration=10s -output=result.bin"
+            }
+        }
+    ]
+}
