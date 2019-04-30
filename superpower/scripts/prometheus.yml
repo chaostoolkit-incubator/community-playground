@@ -1,0 +1,23 @@
+global:
+    scrape_interval:     5s
+    evaluation_interval: 5s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+  - job_name: 'superpower'
+    static_configs:
+      - targets: ['localhost:6060']
+  - job_name: 'powersource'
+    static_configs:
+      - targets: ['localhost:6061']
+  - job_name: 'jaeger-agent'
+    static_configs:
+      - targets: ['localhost:5778']
+  - job_name: 'jaeger-collector'
+    static_configs:
+      - targets: ['localhost:14268']
+  - job_name: 'jaeger-query'
+    static_configs:
+      - targets: ['localhost:16686']

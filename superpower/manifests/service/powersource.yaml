@@ -1,0 +1,17 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: powersource-service
+  namespace: mucon
+  labels:
+    service: powersource-service
+spec:
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 6061
+    nodePort: 30240
+  selector:
+    service: powersource-service

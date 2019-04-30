@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" href="favicon/favicon.ico"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+        <link rel="manifest" href="favicon/site.webmanifest">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+            
+        <style>
+            @import url("https://fonts.googleapis.com/css?family=Montserrat:300,300i,600,600i");
+            html {
+                background: url(/public/images/{{ img_url }}) no-repeat center center fixed; 
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+                width: 100%;
+                height: 100%;
+                color: #fff;
+            }
+            body {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 20px;
+                font-weight: 300;
+                line-height: 1.2;
+            }
+            section {
+                text-align: center;
+                top: 40%;
+                transform: translateY(-10%);
+                position: relative;
+                font-size: 5em;
+            }
+            .small {
+                font-size: 30px;
+                font-weight: 200;
+            }
+            a, a:visited {
+                color: #fff;
+                text-decoration: none;
+                font-weight: 100;
+            }
+            a:hover, a:active {
+                color: #fff;
+                font-weight: 100;
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+   <body>
+        <section>
+        <h1>You are {{name}}!</h1>
+        <p class="small">{{description}}</p>
+        {% if learn_more_url %} <h4><a href="{{learn_more_url}}">Learn more!</a></h4> {% endif %}
+        </section>
+    </body>
+</html>

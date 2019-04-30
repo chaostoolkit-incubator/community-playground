@@ -27,3 +27,7 @@ hs_err_pid*
 *.iml
 target
 .idea
+
+# Ignores for application temporary files
+characters.json
+superpower/superpower-static/images/*

@@ -1,0 +1,60 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-app
+  namespace: mucon
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: prometheus-service
+  template:
+    metadata:
+      name: prometheus-app
+      labels:
+        name: prometheus-app
+        app: prometheus-app
+        service: prometheus-service
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+    spec:
+      containers:
+      - name: prometheus-app
+        args:
+        - --config.file=/etc/prometheus/prometheus.yml
+        - --storage.tsdb.path=/prometheus
+        - --storage.tsdb.retention=24h
+        command:
+        - /bin/prometheus
+        image: quay.io/prometheus/prometheus:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9090
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 800Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        volumeMounts:
+        - mountPath: /etc/prometheus
+          name: config
+          readOnly: true
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: config
+          configMap:
+           name: prometheus-cm
+           items:
+              - key: prometheus.yml
+                path: prometheus.yml
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate

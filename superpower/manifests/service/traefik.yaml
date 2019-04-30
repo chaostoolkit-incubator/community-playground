@@ -1,0 +1,19 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-ingress-service
+  namespace: mucon
+spec:
+  selector:
+    k8s-app: traefik-ingress-lb
+  ports:
+    - protocol: TCP
+      port: 80
+      name: web
+      nodePort: 30280
+    - protocol: TCP
+      port: 8080
+      name: admin
+      nodePort: 30281
+  type: NodePort
