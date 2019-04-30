@@ -18,8 +18,8 @@ To run this demo, you must install:
 [Minikube][minikube] is a tool that creates a VM on your machine and deploy
 Kubernetes on that VM. This means you have a single-node Kubernetes environment.
 
-By default, the VM created uses 4Gb of memory and 4vCPUs. It also the KVM2
-hypervisor to create the virtual machine, not VirtualBox.
+By default, the VM created uses 4Gb of memory and 4vCPUs. You may want to run `minikube delete` to
+ start with fresh settings on the minikube VM.
 
 Please amend the `scripts/deploy-minikube.sh` accordingly if you want different
 settings.

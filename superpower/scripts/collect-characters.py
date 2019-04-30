@@ -60,7 +60,7 @@ async def collect_characters(public_key: str, private_key: str):
                     print(data["count"])
                     break
 
-    with open("./superpower/characters.json", "w") as f:
+    with open("./powersource/characters.json", "w") as f:
         f.write(json.dumps(characters))
 
 

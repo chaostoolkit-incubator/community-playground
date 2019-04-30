@@ -10,7 +10,7 @@ architecture to explore Chaos Engineering experiments using the
 
 The architecture of our application is as follows:
 
-![Architecture](https://github.com/chaosiq/superpower-demo/raw/master/data/arch.png "Architecture")
+![Architecture](https://github.com/chaostoolkit-incubator/community-playground/superpower/raw/master/data/arch.png "Architecture")
 
 As you can see, it's really simple. Users talk to the superpower service which
 talks to the powersource service.
@@ -18,14 +18,14 @@ talks to the powersource service.
 The superpower service asks the powersource for data before returning it to the
 user in HTML or JSON format.
 
-The presentation for this demo can be found [here](https://www.slideshare.net/Lawouach/chaos-engineering-and-systems-reliability)
+The original presentation for this sample as a demo can be found [here](https://www.slideshare.net/Lawouach/chaos-engineering-and-systems-reliability)
 and the talk [here](https://skillsmatter.com/skillscasts/12908-distributed-system-reliability-through-chaos-engineering).
 
 ### Application Promises
 
 Our application makes two promises to users:
 
-* each time you come back to it, you will get the same superpower (you can turn from hero to vilain suddenly)
+* each time you come back to it, you will get the same superpower (you can turn from hero to villain suddenly)
 * the latency to receive your superpower should be under a second
 
 Our experiments will keep those promises in mind to understand how failures
@@ -36,7 +36,7 @@ or changes impact our users.
 We are going to explore various scenarios that will help us learn how such a
 simple architecture copes with degraded conditions.
 
-## Collect data
+## Collect the data
 
 The data used by this demo is under copyright by [Marvel][]. For this reason,
 you need to collect the data yourself prior to running this demo.
@@ -44,7 +44,7 @@ you need to collect the data yourself prior to running this demo.
 To achieve that, you must first create an [API key][apikey] and store it into
 the following variables:
 
-```
+```shell
 $ export MARVEL_API_PUBLIC_KEY=...
 $ export MARVEL_API_PRIVATE_KEY=...
 ```
