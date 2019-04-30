@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: "ingress"
+menu:
+  microservice:
+    name: "menu-service"

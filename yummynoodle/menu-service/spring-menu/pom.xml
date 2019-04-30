@@ -9,27 +9,14 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.chaostoolkit.yummynoodle</groupId>
-	<artifactId>ingres</artifactId>
+	<artifactId>menu</artifactId>
 	<version>0.1.0</version>
-	<name>ingres</name>
-	<description>Yummy Noodle Ingres Service</description>
+	<name>menu</name>
+	<description>Yummy Noodle Menu Service</description>
 
 	<properties>
 		<java.version>1.8</java.version>
-        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
 	</properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
 	<dependencies>
 		<dependency>
