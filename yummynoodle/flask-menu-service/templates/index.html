@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+  <h3> This is the start of my child template</h3>
+  <br>
+  <h3>index page</h3>
+
+  <h3>Links</h3>
+
+  <ul>
+      <li><a href="menu/api/v1.0/menus">Menu service json</a></li>
+      <li><a href="menu/api/v1.0/menu/1">Menu service (single item) 1</a></li>
+      <li><a href="/dummy">Dummy data page showing using templating and data table</a></li>
+      <li><a href="/hello">Hello page</a></li>
+      <li><a href="/health">health</a></li>
+      <li><a href="/live">live</a></li>
+  </ul>
+
+  <h3> This is the end of my child template</h3>
+{% endblock %}
+

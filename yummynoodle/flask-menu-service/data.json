@@ -1,0 +1,15 @@
+{
+    "data": [{
+    	"id": 1,
+        "item": "Fried Rice",
+        "description": "Fried Rice",
+        "group": "Rice",
+        "price": 1.20
+    }, {
+	    "id": 2,
+        "item": "Sweet & Sour Pork",
+        "description": "Sweet & Sour Pork in batter",
+        "group": "Pork",
+        "price": 4.20
+    }]
+}
