@@ -8,7 +8,6 @@ RUN apk update && \
     rm -rf /tmp/* /root/.cache
 
 ADD app.py app.py
-ADD characters.json characters.json
 ADD templates templates
 
 EXPOSE 6060/tcp
