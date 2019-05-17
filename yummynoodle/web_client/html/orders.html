@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flask Template Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  </head>
+  <body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="index.html">Menu </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="orders.html">Orders <span class="sr-only">(current)</span></a>
+                </li>
+              </ul>
+            </div>
+        </nav>
+      <h1>Orders page</h1>
+
+      <table class="table table-striped thead-dark" id="ordersTable"  width="100%">
+          <thead>
+            <tr>
+              <th>Key</th>
+              <th>Customer</th>
+              <th>Items</th>
+              <th>Order Date</th>
+              <th>Time</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+        </table>
+
+      <!-- <button type="button" class="btn btn-primary" onclick="writeOrderData()">Write Order</button> -->
+
+
+     <!-- Button trigger modal -->
+
+  <!-- Modal -->
+
+
+
+      <br>
+      <footer class="footer mt-auto py-3">
+          <div class="container">
+            <span class="text-muted">Version 0.0.1</span>
+          </div>
+      </footer>
+    </div>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+
+    <!-- <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script> -->
+
+
+    <script src="main.js"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+
+
+<script>
+
+  var database;
+  window.addEventListener("load", function(){
+    console.log("loaded")
+    // Your web app's Firebase configuration
+
+
+  });
+
+var dataSet = []
+
+$(document).ready(function() {
+
+
+  var firebaseConfig = {
+      apiKey: "AIzaSyDYY6jpN6eqax12nPBSFZC1VnY_fdKy1eQ",
+      authDomain: "yn-orders-db.firebaseapp.com",
+      databaseURL: "https://yn-orders-db.firebaseio.com",
+      projectId: "yn-orders-db",
+      storageBucket: "yn-orders-db.appspot.com",
+      messagingSenderId: "227393144159",
+      appId: "1:227393144159:web:0f6560f69c264dbd"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    database = firebase.database();
+
+    var ordersRef= firebase.database().ref('/orders/');
+
+    ordersRef.on('child_added', callbackAdded);
+    ordersRef.on('child_changed', callbackChanged);
+
+
+    ordersRef.on('child_removed', (data) => {
+    console.log ("on child removed data.key:" +data.key);
+
+
+    //var licensedNode = document.getElementById(data.key);
+    //licensedNode.parentNode.removeChild(licensedNode);
+});
+
+
+
+
+    // alert ("loaded");
+    $('#ordersTable').DataTable( {
+
+        data: dataSet
+        ,
+        "columns": [
+            { data: "key" },
+            { data: "customer" },
+            { data: "items" },
+            { data: "deliveryDT" },
+            { data: "deliveryDT" },
+            { data: "status" },
+            { data: "key" }
+        ],
+        "columnDefs": [
+            { "visible": false, "targets": 0 } ,
+            {
+                "targets": [3],
+                "render": function (data, type, row){
+                    // console.log("got here")
+                    return data.split(" ")[0]
+                },
+            },
+            {
+                "targets": [4],
+                "render": function (data, type, row){
+                    // console.log("got here")
+                    return data.split(" ")[1]
+                },
+            },
+            {
+                "targets": [6],
+                "render": function (data, type, row){
+                    // console.log("got here")
+                    // return "<i class=\"material-icons\">check</i>
+                    var msg = "Action col " +data+ "-xxxx"
+                    console.log(msg)
+                    var resStr = '<button id='+data+' class="mdc-icon-button material-icons"  onclick="completeOrder(this.id)">check</button>'
+                    if (row.status === "complete")
+                    resStr = '<button id='+data+' class="mdc-icon-button material-icons"  onclick="deleteOrder(this.id)">delete</button>'
+                    console.log(resStr)
+
+                    return resStr
+                },
+            }
+        ]
+
+    } );
+
+
+});
+
+
+
+var callbackAdded = function(snap) {
+
+console.log("callbackAdded");
+
+var row = snap.val();
+
+console.log("row from db:", snap.key);
+console.log("row from db:", row);
+
+var ordersRow = buildOrderRow(snap.key, snap.val());
+var table = $('#ordersTable').DataTable ();
+
+table.rows.add([ordersRow]).draw();
+
+};
+
+var callbackChanged = function(snap) {
+    console.log("callbackChanged");
+
+    // this should work by some kind of reload of the table, but for expediency
+    // reload the page
+    //var table = $('#ordersTable').DataTable ();
+    //table.draw(false);
+
+    location.reload();
+
+};
+
+function completeOrder(id)
+{
+  console.log("set order to complete for id:" , id)
+
+  firebase.database().ref('orders/' + id).update({
+    status: "complete"
+  });
+}
+
+function deleteOrder(id)
+{
+  deleteEntry(id);
+
+  location.reload();
+}
+
+
+function deleteEntry(id){
+    console.log("deleting:" +id);
+    var ref = firebase.database().ref('orders/' + id);
+    ref.once('value', function (snapshot) {
+        if (snapshot === null) {
+            console.log("does not exist")
+        } else {
+         snapshot.ref.remove();
+        //  $('#example').DataTable().ajax.reload();
+         console.log("removed")
+        //  row.remove().draw(false);
+        }
+    });
+}
+
+
+//  $("form").on('submit', function (e) {
+//    //ajax call here
+
+//    //stop form submission
+//    e.preventDefault();
+// });
+
+
+</script>
+
+
+  </body>
+</html>

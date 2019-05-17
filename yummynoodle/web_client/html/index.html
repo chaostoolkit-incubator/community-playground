@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flask Template Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+
+  </head>
+  <body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Yummy Noodles</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="orders.html">Orders</a>
+                </li>
+              </ul>
+            </div>
+        </nav>
+      <h1>Menu page</h1>
+
+      <!-- <button type="button" class="btn btn-primary" onclick="writeOrderData()">Write Order</button> -->
+      <button type="button" class="btn btn-primary" onclick="showNewOrderModal(event)">
+          New Order
+      </button>
+
+
+      <br>
+      <table class="table table-striped thead-dark" id="example"  width="100%">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Item</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Order</th>
+          </tr>
+        </thead>
+      </table>
+
+     <!-- Button trigger modal -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="newOrderModal" tabindex="-1" role="dialog" aria-labelledby="newOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newOrderModalLabel">Yummy Noodle Order</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form id="order-form">
+          <div class="modal-body">
+                  <div class="form-group">
+                    <label for="customerName">Customer Name</label>
+                    <input type="text" class="form-control" name="customerName" aria-describedby="customerHelp" placeholder="Customer name">
+                    <small id="customerHelp" class="form-text text-muted">Please enter your unique cusdtomer name.</small>
+                    <label for="deviveryTime">Ready Time</label>
+                    <input id="datetimepicker" type="text" class="form-control" name="deliveryTime" aria-describedby="deliveryTimeHelp" placeholder="delivery time">
+                    <small id="deliveryTimeHelp" class="form-text text-muted">Please enter required delivery time.</small>
+                    <hr>
+                    <label for="orders">Menu Selection</label>
+                    <select class="js-example-basic-multiple" name="orders" multiple="multiple"  style="width: 100%"></select>
+                    <small id="deliveryTimeHelp" class="form-text text-muted">Please enter your menu selections.</small>
+                  </div>
+          </div>
+          <div class="modal-footer">
+              <input type="submit" class="btn btn-primary" value="Submit Order"></input>
+          </div>
+      </form>
+      </div>
+    </div>
+  </div>
+
+
+
+      <br>
+      <footer class="footer mt-auto py-3">
+          <div class="container">
+            <span class="text-muted">Version 0.0.1</span>
+          </div>
+      </footer>
+    </div>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/en-gb.js"></script>
+
+    <!-- <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script> -->
+
+
+    <script src="main.js"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+
+
+<script>
+
+  function showNewOrderModal(event)
+  {
+    $(".js-example-basic-multiple").select2({
+      data: menuData
+    })
+    var dateStr = moment().add(10, 'minutes').format('DD-MM-YYYY HH:mm');
+
+    $('#datetimepicker').val(dateStr);
+
+
+    $('#newOrderModal').modal()
+
+  }
+
+
+  // Get a reference to the database service
+  var database;
+  window.addEventListener("load", function(){
+    console.log("loaded")
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDYY6jpN6eqax12nPBSFZC1VnY_fdKy1eQ",
+      authDomain: "yn-orders-db.firebaseapp.com",
+      databaseURL: "https://yn-orders-db.firebaseio.com",
+      projectId: "yn-orders-db",
+      storageBucket: "yn-orders-db.appspot.com",
+      messagingSenderId: "227393144159",
+      appId: "1:227393144159:web:0f6560f69c264dbd"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    database = firebase.database();
+
+    jQuery('#datetimepicker').datetimepicker();
+
+});
+
+$("#order-form").on('submit', function(e) { //use on if jQuery 1.7+
+        e.preventDefault();  //prevent form from submitting
+
+        console.log("order submitted")
+        var orders = $('.js-example-basic-multiple').val();
+        var customer =  $("input[name=customerName]").val();
+        var dateTime= $("input[name=deliveryTime]").val();
+
+        writeOrderDatatoFirebase(customer,orders,dateTime);
+
+        $('#newOrderModal').modal('hide');
+
+    });
+
+  // function writeOrderData(order)
+  function writeOrderDatatoFirebase(customer,orders,orderDateTime)
+  {
+    console.log("writeOrderData")
+     // A post entry.
+     var orderData = {
+       customer: customer,
+       items: orders,
+       orderDate: orderDateTime,
+      status: "placed"
+     };
+
+    // Get a key for a new Order.
+    var newOrderKey = firebase.database().ref().child('orders').push().key;
+
+      //var ordersRef= firebase.database().ref('/orders/');
+
+    // Write the new post's data simultaneously in the posts list and the user's post list.
+    var updates = {};
+    updates['/orders/' + newOrderKey] = orderData;
+
+    return firebase.database().ref().update(updates);
+ }
+
+</script>
+
+
+  </body>
+</html>
