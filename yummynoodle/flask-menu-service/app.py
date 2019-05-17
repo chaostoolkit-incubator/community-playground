@@ -1,9 +1,12 @@
 from flask import Flask
 from flask import abort
 from flask import jsonify, request, render_template
+from flask_cors import CORS
 import json
 
 app = Flask(__name__)
+CORS(app)
+
 
 @app.route("/hello")
 def hello():

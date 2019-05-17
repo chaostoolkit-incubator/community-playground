@@ -19,7 +19,7 @@ $ docker build -t flask-menu-service:latest .
 Run the Docker container using the command shown below.
 
 ```bash
-$ docker run -d -p 5000:5000 flask-menu-service
+$ docker run docker run -d -p 5000:5000 flask-menu-service
 ```
 To determine the ip address of the docker machine execute
 ```bash

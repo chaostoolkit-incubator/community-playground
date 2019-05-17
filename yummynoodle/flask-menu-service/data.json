@@ -3,13 +3,51 @@
     	"id": 1,
         "item": "Fried Rice",
         "description": "Fried Rice",
-        "group": "Rice",
+        "group": "Rice dishes",
         "price": 1.20
-    }, {
+    },
+    {
 	    "id": 2,
         "item": "Sweet & Sour Pork",
         "description": "Sweet & Sour Pork in batter",
-        "group": "Pork",
+        "group": "Rice dishes",
         "price": 4.20
-    }]
+    },
+    {
+	    "id": 3,
+        "item": "Chicken & Vegetable Fried Rice",
+        "description": "Chicken & Vegetable Fried Rice",
+        "group": "Rice dishes",
+        "price": 6.20
+    },
+    {
+	    "id": 4,
+        "item": "Spicy Beef Rice with Onions",
+        "description": "Spicy Beef Rice with Onions",
+        "group": "Rice dishes",
+        "price": 6.40
+    },
+    {
+	    "id": 5,
+        "item": "Mixed Vegetable Chow Mein",
+        "description": "Chinese noodles cooked with garlic, carrots, mushrooms, mange tout, bean sprouts or seasonal vegetables",
+        "group": "Noodle dishes",
+        "price": 6.10
+    },
+    {
+	    "id": 6,
+        "item": "Szechwan Fried Noodles",
+        "description": "Chinese noodles, marinated chicken breast cooked with garlic, chilli, mushrooms, bean sprouts and spring onions",
+        "group": "Noodle dishes",
+        "price": 6.10
+    },
+    {
+	    "id": 7,
+        "item": "Chicken with Black Bean Sauce",
+        "description": "Chinese noodles cooked with marinated chicken breast, green and red peppers, onions, garlic and black bean sauce.",
+        "group": "Noodle dishes",
+        "price": 6.10
+    }
+
+]
 }
