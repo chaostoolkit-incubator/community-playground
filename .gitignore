@@ -31,3 +31,10 @@ target
 # Ignores for application temporary files
 characters.json
 superpower/superpower-static/images/*
+from-local-to-automated-chaostoolkit/experiments/v?.json
+from-local-to-automated-chaostoolkit/commands.sh
+
+__pycache__/
+
+chaostoolkit.log
+journal.json
