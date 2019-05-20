@@ -1,0 +1,16 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: counter
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: counter.dev
+    http:
+      paths:
+      - backend:
+          serviceName: service1
+          servicePort: 8000
+        path: /
