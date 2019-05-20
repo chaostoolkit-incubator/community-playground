@@ -1,0 +1,10 @@
+controls:
+  opentracing:
+    provider:
+      arguments:
+        provider: jaeger
+        host: 10.1.1.141
+        port: 6831
+        propagation: b3
+      module: chaostracing.control
+      type: python

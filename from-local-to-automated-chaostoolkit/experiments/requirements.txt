@@ -1,0 +1,13 @@
+chaostoolkit
+chaostoolkit-humio
+#chaostoolkit-opentracing
+#chaostoolkit-kubernetes
+chaostoolkit-prometheus
+chaostoolkit-humio
+jaeger-client
+opentracing
+requests
+
+-e git+https://github.com/chaostoolkit-incubator/chaostoolkit-opentracing.git@opentracing2#egg=chaostoolkit-opentracing
+-e git+https://github.com/chaostoolkit/chaostoolkit-lib.git@master#egg=chaostoolkit-lib
+-e git+https://github.com/chaostoolkit/chaostoolkit-kubernetes.git@rollout-rollback#egg=chaostoolkit-kubernetes

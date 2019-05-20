@@ -1,0 +1,40 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: service1
+  labels:
+    app: service1
+spec:
+  jobLabel: service1
+  namespaceSelector:
+    matchNames:
+    - default
+  selector:
+    matchLabels:
+      app: service1
+  endpoints:
+  - port: http
+    path: /metrics
+    scheme: http
+    interval: 2s
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: service2
+  labels:
+    app: service2
+spec:
+  jobLabel: service2
+  namespaceSelector:
+    matchNames:
+    - default
+  selector:
+    matchLabels:
+      app: service2
+  endpoints:
+  - port: http
+    path: /metrics
+    scheme: http
+    interval: 2s

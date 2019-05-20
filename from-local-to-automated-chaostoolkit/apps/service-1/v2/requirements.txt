@@ -1,0 +1,6 @@
+uvicorn
+starlette
+requests-async
+jaeger-client
+opentracing
+aioprometheus

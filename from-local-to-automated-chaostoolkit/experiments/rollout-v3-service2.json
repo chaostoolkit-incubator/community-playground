@@ -1,0 +1,150 @@
+{
+    "version": "1.0.0",
+    "title": "Rollout unhealthy service 2 is transparent to our users",
+    "description": "Rolling out a backend service should not impact the service our users rely on",
+    "tags": ["service1", "service2"],
+    "configuration": {
+        "counter_service_url": {
+            "type": "env",
+            "key": "COUNTER_URL"
+        },
+        "prometheus_base_url": {
+            "type": "env",
+            "key": "PROMETHEUS_URL"
+        },
+        "tracing_provider": "jaeger",
+        "tracing_host": {
+            "type": "env",
+            "key": "JAEGER_HOST"
+        },
+        "tracing_port": 6831,
+        "tracing_propagation": "b3"
+    },
+    "contributions": {
+        "availability-near-100%": "high",
+        "availability-near-99%": "high",
+        "performability": "low"
+    },
+    "secrets": {
+        "humio": {
+            "token": {
+                "type": "env",
+                "key": "HUMIO_INGEST_TOKEN"
+            },
+            "dataspace": {
+                "type": "env",
+                "key": "HUMIO_DATASPACE"
+            }
+        }
+    },
+    "controls": [
+        {
+            "name": "opentracing",
+            "automatic": true,
+            "provider": {
+                "type": "python",
+                "module": "chaostracing.control"
+            }
+        },
+        {
+            "name": "humio-logger",
+            "provider": {
+                "type": "python",
+                "module": "chaoshumio.control",
+                "secrets": ["humio"]
+            }
+        }
+    ],
+    "steady-state-hypothesis": {
+        "title": "If users see errors, it may be due to a rollout breaking the link between services",
+        "probes": [
+            {
+                "type": "probe",
+                "name": "no-http-errors-returned-from-service",
+                "tolerance": {
+                    "type": "jsonpath",
+                    "path": "$.data.result.*[?(@.value[1]!=\"0\")]",
+                    "count": 0
+                },
+                "provider": {
+                    "type": "python",
+                    "module": "chaosprometheus.probes",
+                    "func": "query",
+                    "arguments": {
+                        "query": "rate(svc_responses_total{name='service1',status_code='500',path='/'}[10s])"
+                    }
+                }
+            }
+        ]
+    },
+    "method": [
+        {
+            "type": "action",
+            "name": "initiate-rollout-v3-of-service2",
+            "provider": {
+                "type": "python",
+                "module": "chaosk8s.deployment.actions",
+                "func": "set_deployment_image",
+                "arguments": {
+                    "deployment_name": "service2",
+                    "container_name": "service2",
+                    "image": "lawouach/service2:v3"
+                }
+            }
+        },
+        {
+            "type": "action",
+            "name": "pretend-users-in-background",
+            "provider": {
+                "type": "python",
+                "module": "load",
+                "func": "single",
+                "arguments": {
+                    "url": "${counter_service_url}",
+                    "duration": 20
+                }
+            }
+        },
+        {
+            "type": "probe",
+            "name": "read-deployment-status",
+            "provider": {
+                "type": "python",
+                "module": "chaosk8s.deployment.probes",
+                "func": "collect_deployment_status",
+                "arguments": {
+                    "deployment_name": "service2",
+                    "duration": 25
+                }
+            }
+        },
+        {
+            "type": "probe",
+            "name": "read-counter-for-the-past-30-seconds",
+            "provider": {
+                "type": "python",
+                "module": "chaosprometheus.probes",
+                "func": "query_interval",
+                "arguments": {
+                    "query": "counter{name='service1'}",
+                    "start": "30 seconds ago",
+                    "end": "now"
+                }
+            }
+        }
+    ],
+    "rollbacks": [
+        {
+            "type": "action",
+            "name": "rollback-service3-update",
+            "provider": {
+                "type": "python",
+                "module": "chaosk8s.deployment.actions",
+                "func": "rollback_deployment",
+                "arguments": {
+                    "deployment_name": "service2"
+                }
+            }
+        }
+    ]
+}

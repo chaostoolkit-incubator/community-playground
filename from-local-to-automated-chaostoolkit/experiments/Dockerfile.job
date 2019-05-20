@@ -1,0 +1,11 @@
+FROM chaostoolkit/kubernetes-job:0.1.10
+
+RUN pip install --no-cache-dir -U -e git+https://github.com/chaostoolkit-incubator/chaostoolkit-opentracing.git@opentracing2#egg=chaostoolkit-opentracing && \
+    pip install --no-cache-dir -U -e git+https://github.com/chaostoolkit/chaostoolkit-lib.git@master#egg=chaostoolkit-lib && \
+    pip install --no-cache-dir -U -e git+https://github.com/chaostoolkit/chaostoolkit-kubernetes.git@rollout-rollback#egg=chaostoolkit-kubernetes
+
+
+ENV PYTHONPATH "${PYTHONPATH}:/"
+ADD settings.yaml /root/.chaostoolkit/settings.yaml
+ADD load.py load.py
+COPY rollout*.json ./
