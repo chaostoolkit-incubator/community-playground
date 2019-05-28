@@ -1,6 +1,6 @@
 # The Chaos Toolkit Community Playground
 
-Contains the Chaos Toolkit Community Playground Project. The goal of this project is to creat a collection of sample applications and accompanying setups and sample experiments to demonstrate how to use the Chaos Toolkit to surface evidence of system weaknesses as well as then usew those same experiments to form the basis of a Continuous Chaos environment where the experiments have graduated into becoming chaos tests.
+The goal of this project is to creat a collection of sample applications and accompanying setups and sample experiments to demonstrate how to use the Chaos Toolkit to surface evidence of system weaknesses as well as then usew those same experiments to form the basis of a Continuous Chaos environment where the experiments have graduated into becoming chaos tests.
 
 This project exists to provide a place where the Chaos Toolkit community can share their experiments and collectively show how we can all collaborate on choas engineering while targetting a selection of samples that are likely to grow in complexity over time. Rather than lock a collection of samples and experiments away in different repos, this project will be wholly owned and evolved by the community to showcase real-world experiments against sample applications that we'll also try to make as real as possible.
 
