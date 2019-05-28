@@ -1,0 +1,52 @@
+{
+    "version": "1.0.0",
+    "title": "A simple sample experiment that can be executed to show controls",
+    "description": "Does nothing at all other than be executable by the Chaos Toolkit",
+    "tags": [],
+    "steady-state-hypothesis": {
+        "title": "Assess the Steady State ... (not really in this case)",
+        "probes": [
+            {
+                "type": "probe",
+                "name": "hypothesis-activity",
+                "tolerance": 0,
+                "provider": {
+                    "type": "process",
+                    "path": "echo",
+                    "arguments": "'updated'"
+                }
+            }
+        ]
+    },
+    "method": [
+		{
+            "type": "action",
+            "name": "dangerous-method-activity",
+            "provider": {
+                "type": "process",
+                "path": "echo",
+                "arguments": "'updated'"
+            },
+            "controls": [
+                {
+                    "name": "prompt",
+                    "provider": {
+                        "type": "python",
+                        "module": "chaosyorn.control"
+                    }
+                }
+            ]
+        }
+    ],
+    "rollbacks": [
+        {
+            "type": "action",
+            "name": "rollback-activity",
+            "provider": {
+                "type": "process",
+                "path": "echo",
+                "arguments": "'updated'"
+            }
+        }
+    ]
+}

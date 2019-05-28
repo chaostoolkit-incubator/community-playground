@@ -20,3 +20,4 @@ The following sample applications and accompanying experiments are provided in t
 
 * [The Yummy Noodle Bar](yummynoodle/)
 * [From local to automated chaostoolkit](from-local-to-automated-chaostoolkit/)
+* [Interactive Chaos Toolkit Controls](interactive-controls/)
