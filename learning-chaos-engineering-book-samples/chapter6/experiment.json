@@ -1,0 +1,68 @@
+{
+    "version": "1.0.0",
+    "title": "My application is resilient to admin-instigated node drainage",
+    "description": "Can my application maintain its minimum resources?",
+    "tags": [
+        "service",
+        "kubernetes"
+    ],
+    "steady-state-hypothesis": {
+        "title": "Services are all available and healthy",
+        "probes": [
+            {
+                "type": "probe",
+                "name": "application-must-respond-normally",
+                "tolerance": 200,
+                "provider": {
+                    "type": "http",
+                    "url": "http://http://35.189.85.252/",
+                    "timeout": 3
+                }
+            },
+            {
+                "type": "probe",
+                "name": "pods_in_phase",
+                "tolerance": true,
+                "provider": {
+                    "type": "python",
+                    "module": "chaosk8s.pod.probes",
+                    "func": "pods_in_phase",
+                    "arguments": {
+                        "label_selector": "biz-app-id=retail",
+                        "phase": "Running",
+                        "ns": "default"
+                    }
+                }
+            }
+        ]
+    },
+    "method": [
+        {
+            "type": "action",
+            "name": "drain_node",
+            "provider": {
+                "type": "python",
+                "module": "chaosk8s.node.actions",
+                "func": "drain_nodes",
+                "arguments": {
+                    "name": "gke-disruption-demo-default-pool-9fa7a856-jrvm",
+                    "delete_pods_with_local_storage": true
+                }
+            }
+        }
+    ],
+    "rollbacks": [
+        {
+            "type": "action",
+            "name": "uncordon_node",
+            "provider": {
+                "type": "python",
+                "module": "chaosk8s.node.actions",
+                "func": "uncordon_node",
+                "arguments": {
+                    "name": "gke-disruption-demo-default-pool-9fa7a856-jrvm"
+                }
+            }
+        }
+    ]
+}
