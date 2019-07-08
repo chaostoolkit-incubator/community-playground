@@ -1,0 +1,15 @@
+{
+	"apiVersion": "policy/v1beta1",
+	"kind": "PodDisruptionBudget",
+	"metadata": {
+		"name": "my-app-pdb"
+	},
+	"spec": {
+		"minAvailable": 3,
+		"selector": {
+			"matchLabels": {
+				"name": "my-app"
+			}
+		}
+	}
+}
