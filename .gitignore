@@ -38,3 +38,4 @@ __pycache__/
 
 chaostoolkit.log
 journal.json
+exchange.dat*
