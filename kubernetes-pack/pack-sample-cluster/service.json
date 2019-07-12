@@ -1,0 +1,24 @@
+{
+    "kind": "Service",
+    "apiVersion": "v1",
+    "metadata": {
+      "name": "my-service",
+      "labels": {
+        "service": "my-service"
+      }
+    },
+    "spec": {
+      "type": "LoadBalancer",
+      "ports": [
+        {
+          "protocol": "TCP",
+          "port": 80,
+          "targetPort": 8080
+        }
+      ],
+      "selector": {
+        "service": "my-service"
+      },
+      "sessionAffinity": "None"
+    }
+  }

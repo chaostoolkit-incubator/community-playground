@@ -1,0 +1,54 @@
+{
+    "apiVersion" : "apps/v1beta1",
+    "kind" : "Deployment",
+    "metadata" : {
+      "name" : "my-service"
+    },
+    "spec" : {
+      "replicas" : 3,
+      "selector" : {
+        "matchLabels" : {
+          "service" : "my-service"
+        }
+      },
+      "template" : {
+        "metadata" : {
+          "name" : "my-app",
+          "labels" : {
+            "name" : "my-app",
+            "service" : "my-service",
+            "biz-app-id" : "retail"
+          }
+        },
+        "spec" : {
+          "containers" : [ {
+            "name" : "my-app",
+            "ports" : [ {
+              "name" : "http",
+              "containerPort" : 8080,
+              "protocol" : "TCP"
+            } ],
+            "imagePullPolicy" : "Always",
+            "image" : "docker.io/chaosiq/sampleservice:0.1.0",
+            "resources" : {
+              "limits" : {
+                "cpu" : 0.1,
+                "memory" : "64Mi"
+              },
+              "requests" : {
+                "cpu" : 0.1,
+                "memory" : "64Mi"
+              }
+            }
+          } ]
+        }
+      },
+      "strategy" : {
+        "type" : "RollingUpdate",
+        "rollingUpdate" : {
+          "maxUnavailable" : 1,
+          "maxSurge" : 1
+        }
+      }
+    }
+  }
