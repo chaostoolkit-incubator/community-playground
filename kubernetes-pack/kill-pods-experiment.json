@@ -10,17 +10,9 @@
             "type": "env",
             "key": "APPLICATION_ENTRYPOINT_URL"
         },
-        "service_url_timeout": {
-            "type": "env",
-            "key": "SERVICE_URL_TIMEOUT"
-        },
         "pod_label_selector": {
             "type": "env",
             "key": "POD_LABEL"
-        },
-        "pod_quantity": {
-            "type": "env",
-            "key": "POD_QUANTITY"
         },
         "pod_namespace": {
             "type": "env",
