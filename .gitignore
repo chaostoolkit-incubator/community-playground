@@ -28,6 +28,9 @@ hs_err_pid*
 target
 .idea
 
+#Emacs temp files
+*~
+
 # Ignores for application temporary files
 characters.json
 superpower/superpower-static/images/*
