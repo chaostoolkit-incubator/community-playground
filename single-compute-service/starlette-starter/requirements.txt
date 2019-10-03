@@ -1,3 +1,4 @@
+Click==7.0
 h11==0.8.1
 httptools==0.0.13
 starlette==0.12.9
