@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+
+  <div class="container">
+    <!-- Example row of columns -->
+    <h1>Chaos Community Playground Demo</h1>
+    <p>You have deployed and run a community playground example </p>
+    <img
+    src="{{ url_for('static', path='chaostoolkit-schema.svg') }}"
+    alt="chaos toolkit schematic "
+    />
+
+    <h2>Links</h2>
+
+    <ul>
+        <li><a href="https://chaosiq.io">ChaosIQ</a></li>
+        <li><a href="https://chaostoolkit.org/">Chaos Toolkit</a></li>
+        <li><a href="https://github.com/chaostoolkit-incubator/community-playground">Chaos Toolkit Community Playground</a></li>
+        <li><a href="https://chaosiq.io/resources/tutorials">ChaosIQ Tutorials</a>
+    </ul>
+
+    <hr>
+    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-url="https://chaostoolkit.org" data-text="Look !. I just successfully ran a Community Playground Demo!" data-size="large" data-related="Chaostookit" data-count="none" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <a href="https://twitter.com/chaostoolkit" class="twitter-follow-button" data-show-count="false" data-size="large" data-dnt="true">Follow @chaostoolkit</a>
+
+    <!-- <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://chaostoolkit.org" data-text="Look !. I just successfully ran a Community Playground Demo!" data-size="large" data-related="Chaostookit" data-count="none">Tweet</a> -->
+
+  </div> <!-- /container -->
+
+</main>
+{% endblock %}
