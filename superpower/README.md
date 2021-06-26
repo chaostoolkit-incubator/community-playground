@@ -25,7 +25,7 @@ and the talk [here](https://skillsmatter.com/skillscasts/12908-distributed-syste
 
 Our application makes two promises to users:
 
-* each time you come back to it, you will get the same superpower (you can turn from hero to vilain suddenly)
+* each time you come back to it, you will get the same superpower (you can turn from hero to villain suddenly)
 * the latency to receive your superpower should be under a second
 
 Our experiments will keep those promises in mind to understand how failures
@@ -66,7 +66,7 @@ Be aware, this will take a few minutes to complete so go grab a coffee :)
 
 ## Deploying the application
 
-You can deploy and run the application using one of the followings:
+You can deploy and run the application using one of the following:
 
 * [Local](https://github.com/chaosiq/superpower-demo/blob/master/docs/local.md): Run natively on your local machine
 * [Kubernetes (minikube)](https://github.com/chaosiq/superpower-demo/blob/master/docs/minikube.md): Run in Kubernetes in a VM on your local machine
@@ -94,7 +94,7 @@ Before you run them, please source the following script:
 $ . scripts/prepare-experiments-env.sh
 ```
 
-Note that this is indeed source this script, not running it.
+Note that this is indeed just sourcing this script, not running it.
 
 You should also install [vegeta][].
 

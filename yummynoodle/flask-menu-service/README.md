@@ -2,7 +2,7 @@
 
 This is a first version of the menu service in Python Flask, it is
 currently using static data but it will evolve to use some form of document
-database probsbly firebase.
+database probably firebase.
 
 To run locally run
 

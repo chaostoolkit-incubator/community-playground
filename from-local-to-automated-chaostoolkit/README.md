@@ -27,7 +27,7 @@ payload:
 }
 ```
 
-The `count` value is an integer that is incremented by the service everytime
+The `count` value is an integer that is incremented by the service every time
 you call the endpoint.
 
 Initially, the service, called `service1`, generates the value on its own.
@@ -63,10 +63,10 @@ Both services expose as well:
 We use Kubernetes to manage our application's lifecycle. Both have their
 own deployment strategies.
 
-When a new version is rolled out, Kubernetes waits up a certain amount of
+When a new version is rolled out, Kubernetes waits up to a certain amount of
 time before accepting that the new version is allowed to take trafic in.
 
-This allows us to reduce the impact on our users shoudld a new version breaks
+This allows us to reduce the impact on our users should a new version break
 on deployment.
 
 This demo is going to focus on scenarios around rollouts essentially.
@@ -79,7 +79,7 @@ environments yet. So please report any issue you might encounter.
 ### Create a Kubernetes cluster
 
 You obviously need to start with running a Kubernetes cluster. It does not
-have to very powerful as we will run a minimal set of pods in there. Our
+have to be very powerful as we will run a minimal set of pods in there. Our
 applications have resource limits which are fairly low.
 
 The demo has been tested on Ubuntu 19.04 against a local Kubernetes cluster
@@ -98,7 +98,7 @@ cluster from your local machine.
 
 ### Install system dependencies
 
-This demo is concerned about showing you how Chaos Toolkit can integrates
+This demo is concerned about showing you how Chaos Toolkit can integrate
 smoothly with your existing tooling (observability, CI/CD...). For the purpose
 of the demo, please install Jaeger and Prometheus in your cluster:
 
@@ -123,7 +123,7 @@ export PROMETHEUS_URL="http://$(kubectl -n monitoring get svc prometheus-k8s -o=
 ```
 
 In addition, the demo may send logs to a central logging service, such as
-[Humio][]. Please set these two variables:
+[Humio](https://www.humio.com/). Please set these two variables:
 
 ```
 export HUMIO_INGEST_TOKEN=
@@ -141,7 +141,7 @@ your `/etc/hosts` file.
 127.0.0.1 counter.dev
 ```
 
-Then add export the following variable:
+Then export the following variable:
 
 ```
 export COUNTER_URL=http://counter.dev/
