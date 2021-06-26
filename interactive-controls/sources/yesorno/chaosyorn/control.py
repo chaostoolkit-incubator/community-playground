@@ -12,7 +12,7 @@ __all__ = ["before_activity_control"]
 
 def before_activity_control(context: Activity, **kwargs):
     """
-    Prompt for Yes or No to executing an activity.
+    Prompt for Yes or No to execute an activity.
     """
     logger.info("About to execute activity: " + context.get("name"))
     if click.confirm('Do you want to continue?'):

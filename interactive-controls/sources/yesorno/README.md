@@ -22,7 +22,7 @@ Then, point your environment to this directory:
 $ python setup.py develop
 ```
 
-Now, you can edit the files and they will be automatically be seen by your
+Now, you can edit the files and they will automatically be seen by your
 environment, even when running from the `chaos` command locally.
 
 ### Test

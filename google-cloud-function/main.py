@@ -12,7 +12,7 @@ import sys
 
         <p>This is a google cloud function that can be used for safeguards with
         ChaosIQ</p>
-        <p>Please add parameters giving lowerand upper bounds:</p>
+        <p>Please add parameters giving lower and upper bounds:</p>
         <a href="?lower=8&upper=18">hours in range link</a>
         </body>
     """
@@ -22,11 +22,11 @@ def hour_is_in_range(lower, upper):
     """returns a boolean indicating if the current hour is within bounds
 
     Parameters:
-    lower (int): lowerbound of range
+    lower (int): lower bound of range
     upper (int): upper bound of range
 
     Returns:
-    bool:True if the current our is between lower and upper, otherwise false
+    bool:True if the current hour is between lower and upper, otherwise false
 
    """
     print(f'hourInRange with lower: {lower} and upper: {upper}')
